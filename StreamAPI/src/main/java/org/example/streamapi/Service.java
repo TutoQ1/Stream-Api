@@ -10,10 +10,16 @@ public class Service {
         if (string == null || string.isEmpty() || !string.matches("[a-zA-Z]+")) {
             throw new Exception("VALOR INVALIDO, SOLO STRINGS");
         }
+        if (list.stream().anyMatch(s -> s.equals(string))){
+            throw new RuntimeException("valor repetido");
+        }
         list.add(string);
     }
 
     public List<String> show() {
-        return list.stream().sorted(String::compareTo).toList();
+        return list;
+    }
+    public void delete(String string){
+        list.removeIf(String -> String.equals(string));
     }
 }

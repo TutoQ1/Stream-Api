@@ -1,5 +1,6 @@
 package org.example.streamapi;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -7,12 +8,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+
     Service service = new Service();
+
+    @FXML
+    private TextField txt_remove;
     @FXML
     private TextField txtField;
     @FXML
@@ -32,10 +39,18 @@ public class Controller implements Initializable {
 
         } catch (Exception e) {
             lbl_Error.setText(e.getMessage());
+            lbl_Error.setVisible(true);
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.3));
+            pause.setOnFinished(event -> lbl_Error.setVisible(false));
+            pause.play();
         }
     }
 
     public void btnHandleResult() {
         listView.setItems(FXCollections.observableArrayList(service.show()));
+    }
+    public void btnHandleRemove(){
+        String txt = txt_remove.getText();
+        service.delete(txt);
     }
 }

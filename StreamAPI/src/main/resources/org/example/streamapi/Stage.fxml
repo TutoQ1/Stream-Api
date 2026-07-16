@@ -11,11 +11,13 @@
     <children>
         <AnchorPane prefHeight="600.0" prefWidth="800.0">
             <children>
-                <Button layoutX="357.0" layoutY="231.0" mnemonicParsing="false" onAction="#btnHandle" text="add" />
-                <TextField fx:id="txtField" layoutX="301.0" layoutY="162.0" />
-                <Label fx:id="lbl_Error" layoutX="361.0" layoutY="316.0" text="Label" textFill="RED" />
-                <Button layoutX="349.0" layoutY="270.0" mnemonicParsing="false" onAction="#btnHandleResult" text="Result" />
-            <ListView fx:id="listView" layoutX="276.0" layoutY="360.0" prefHeight="200.0" prefWidth="200.0" />
+                <Button layoutX="258.0" layoutY="210.0" mnemonicParsing="false" onAction="#btnHandle" text="add" />
+                <TextField fx:id="txtField" layoutX="202.0" layoutY="162.0" />
+                <Label fx:id="lbl_Error" layoutX="361.0" layoutY="316.0" text="Label" textFill="RED" visible="false" />
+                <Button layoutX="252.0" layoutY="243.0" mnemonicParsing="false" onAction="#btnHandleResult" text="Result" />
+            <ListView fx:id="listView" layoutX="276.0" layoutY="360.0" onMouseClicked="#btnHandleRemove" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="txt_remove" layoutX="443.0" layoutY="162.0" />
+            <Button layoutX="499.0" layoutY="210.0" mnemonicParsing="false" onAction="#btnHandleRemove" text="remove" />
             </children>
         </AnchorPane>
     </children>
