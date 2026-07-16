@@ -15,9 +15,10 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-
     Service service = new Service();
 
+    @FXML
+    private Label amount;
     @FXML
     private TextField txt_remove;
     @FXML
@@ -47,7 +48,9 @@ public class Controller implements Initializable {
     }
 
     public void btnHandleResult() {
+        int value = service.amount();
         listView.setItems(FXCollections.observableArrayList(service.show()));
+        amount.setText(String.valueOf(value));
     }
     public void btnHandleRemove(){
         String txt = txt_remove.getText();

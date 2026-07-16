@@ -16,6 +16,10 @@ public class Service {
         list.add(string);
     }
 
+    public int amount(){
+        return list.size();
+    }
+
     public List<String> show() {
         return list;
     }
