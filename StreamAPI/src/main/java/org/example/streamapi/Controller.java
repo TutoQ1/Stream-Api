@@ -20,30 +20,35 @@ public class Controller implements Initializable {
     @FXML
     private Label amount;
     @FXML
-    private TextField txt_remove;
-    @FXML
     private TextField txtField;
     @FXML
     private Label lbl_Error;
     @FXML
     private ListView<String> listView;
 
+    private String selectedItem;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtField.setPromptText("ingrese unicamente strings");
+
+        listView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                selectedItem = newVal;
+                txtField.setText(newVal);
+            }
+        });
     }
 
     public void btnHandle() {
         try {
             String txt = txtField.getText().trim();
+            service.validate(txt);
             service.add(txt);
+            btnHandleResult();
 
         } catch (Exception e) {
-            lbl_Error.setText(e.getMessage());
-            lbl_Error.setVisible(true);
-            PauseTransition pause = new PauseTransition(Duration.seconds(1.3));
-            pause.setOnFinished(event -> lbl_Error.setVisible(false));
-            pause.play();
+            error(e);
         }
     }
 
@@ -52,8 +57,30 @@ public class Controller implements Initializable {
         listView.setItems(FXCollections.observableArrayList(service.show()));
         amount.setText(String.valueOf(value));
     }
+
     public void btnHandleRemove(){
-        String txt = txt_remove.getText();
+        String txt = txtField.getText();
         service.delete(txt);
+        btnHandleResult();
+    }
+
+    public void btnHandleEdit(){
+        try {
+            String txt = txtField.getText();
+            service.edit(selectedItem, txt);
+            service.validate1(txt);
+
+            btnHandleResult();
+        }catch (Exception e){
+            error(e);
+        }
+    }
+    public void error(Exception e){
+        lbl_Error.setVisible(true);
+        lbl_Error.setText(e.getMessage());
+        lbl_Error.setVisible(true);
+        PauseTransition pause = new PauseTransition(Duration.seconds(1.3));
+        pause.setOnFinished(event -> lbl_Error.setVisible(false));
+        pause.play();
     }
 }
