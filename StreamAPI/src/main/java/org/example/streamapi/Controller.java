@@ -25,6 +25,7 @@ public class Controller implements Initializable {
     private Label lbl_Error;
     @FXML
     private ListView<String> listView;
+    @FXML
 
     private String selectedItem;
 
@@ -75,6 +76,7 @@ public class Controller implements Initializable {
             error(e);
         }
     }
+
     public void error(Exception e){
         lbl_Error.setVisible(true);
         lbl_Error.setText(e.getMessage());

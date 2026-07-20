@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Service {
+
+
     List<String> list = new ArrayList<>();
 
     public void validate(String string) throws Exception {
@@ -23,6 +25,8 @@ public class Service {
 
     public void add(String string){
         list.add(string);
+        System.out.println("list1 "+list);
+
     }
 
     public int amount(){
@@ -38,4 +42,5 @@ public class Service {
     public void edit(String oldVal, String newVal){
        list = list.stream().map(s -> s.equals(oldVal)?newVal:s).collect(Collectors.toList());
     }
+
 }
